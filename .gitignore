@@ -15,3 +15,4 @@ upload/
 *.log
 *.gz
 .idea
+.env
