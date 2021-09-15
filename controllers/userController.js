@@ -29,6 +29,20 @@ const userController = {
                 }
             })
         }
+    },
+    signInPage: (req, res) => {
+        return res.render('signin')
+    },
+
+    signIn: (req, res) => {
+        req.flash('success_messages', 'Login successful！')
+        res.redirect('/restaurants')
+    },
+
+    logout: (req, res) => {
+        req.flash('success_messages', 'Logout successful！')
+        req.logout()
+        res.redirect('/signin')
     }
 }
 
