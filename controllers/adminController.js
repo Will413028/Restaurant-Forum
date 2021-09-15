@@ -1,4 +1,3 @@
-
 const db = require('../models')
 const Restaurant = db.Restaurant
 
@@ -28,6 +27,15 @@ const adminController = {
                 res.redirect('/admin/restaurants')
             })
     },
+    getRestaurant: (req, res) => {
+        return Restaurant.findByPk(req.params.id, {
+            raw: true
+        }).then(restaurant => {
+            return res.render('admin/restaurant', {
+                restaurant: restaurant
+            })
+        })
+    }
 }
 
 module.exports = adminController
