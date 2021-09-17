@@ -16,13 +16,13 @@ const userController = {
     signUp: (req, res) => {
         // confirm password
         if (req.body.passwordCheck !== req.body.password) {
-            req.flash('error_messages', '兩次密碼輸入不同！')
+            req.flash('error_messages', 'Your password and confirmation password do not match！')
             return res.redirect('/signup')
         } else {
             // confirm unique user
             User.findOne({ where: { email: req.body.email } }).then(user => {
                 if (user) {
-                    req.flash('error_messages', '信箱重複！')
+                    req.flash('error_messages', 'Email already existed！')
                     return res.redirect('/signup')
                 } else {
                     User.create({
@@ -30,7 +30,7 @@ const userController = {
                         email: req.body.email,
                         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
                     }).then(user => {
-                        req.flash('success_messages', '成功註冊帳號！')
+                        req.flash('success_messages', 'Registration successful！')
                         return res.redirect('/signin')
                     })
                 }
@@ -42,12 +42,12 @@ const userController = {
     },
 
     signIn: (req, res) => {
-        req.flash('success_messages', '成功登入！')
+        req.flash('success_messages', 'Login successful！')
         res.redirect('/restaurants')
     },
 
     logout: (req, res) => {
-        req.flash('success_messages', '登出成功！')
+        req.flash('success_messages', 'Logout successful！')
         req.logout()
         res.redirect('/signin')
     },
