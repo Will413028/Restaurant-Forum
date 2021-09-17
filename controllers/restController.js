@@ -4,10 +4,10 @@ const Category = db.Category
 const Comment = db.Comment
 const User = db.User
 
-const pageLimit = 10
 
 const restController = {
   getRestaurants: (req, res) => {
+    const pageLimit = 9
     let offset = 0
     const whereQuery = {}
     let categoryId = ''
