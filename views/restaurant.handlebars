@@ -15,6 +15,12 @@
     </div>
     <div class="col-md-8">
         <p>{{restaurant.description}}</p>
+        <a class="btn btn-primary" href="/restaurants/{{restaurant.id}}/dashboard">Dashboard</a>
+        {{#if isFavorited }}
+            <form action="/favorite/{{restaurant.id}}?_method=DELETE" method="POST" style="display: contents;"><button type="submit" class="btn btn-danger">Delete Favorite</button></form>
+        {{else}}
+            <form action="/favorite/{{restaurant.id}}" method="POST" style="display: contents;"><button type="submit" class="btn btn-primary">Add Favorite</button></form>
+        {{/if}}
     </div>
     <hr>
 </div>
@@ -39,7 +45,7 @@
 
 <form action="/comments" method="POST">
     <div class="form-group">
-        <label for="text">Add a review：</label>
+        <label for="text">Add review：</label>
         <textarea class="form-control" id="text" name="text" rows="3"></textarea>
     </div>
     <input type="hidden" name="restaurantId" value="{{restaurant.id}}" />
